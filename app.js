@@ -4,13 +4,19 @@ const app = express();
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
 const tweets = require("./routes/api/tweets");
+const passport = require('passport');
+
 
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch(err => console.log(err));
 
-app.get("/", (req, res) => res.send("WASSUdsfasdfasdfp"));
+app.get("/", (req, res) => res.send("Hello World!!"));
+
+app.use(passport.initialize());
+require('./config/passport')(passport);
+
 
 
 const port = process.env.PORT || 5000;
